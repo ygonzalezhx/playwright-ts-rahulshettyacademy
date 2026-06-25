@@ -13,10 +13,15 @@ class AuthApi {
         }
       }
     )
-
     const body = await res.json()
+
+    return {
+      token: body.token,
+      userId: body.userId
+          }
+    //const body = await res.json()
     //return body.token
-    return body
+    //return body
   }
 }
 

@@ -27,8 +27,12 @@ test.describe("Testing dashboard", async()=>{
         dashObj = new DashboardPage(page)
         prodObj = new ProductPage(page)
         authAPI = new AuthApi(request)
-        apiToken = (await authAPI.login(email,pass)).token
-        userId = (await authAPI.login(email,pass)).userId
+        const loginResponse=await authAPI.login(email,pass)
+        apiToken = loginResponse.token
+        userId = loginResponse.userId
+
+        console.log("USERID:", userId)
+        console.log("RESPONSE:",loginResponse)
 
         await loginObj.goToUrl("https://rahulshettyacademy.com/client/")
         await loginObj.setCredentials(email,pass)

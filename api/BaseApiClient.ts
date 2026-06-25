@@ -1,13 +1,22 @@
 import { APIRequestContext, APIResponse } from "@playwright/test"
 
 class BaseApiClient {
+    protected token?: string
   
-    constructor(protected request: APIRequestContext,protected baseURL: string, protected token?:string){
+    constructor(protected request: APIRequestContext,
+        protected baseURL: string,
+        token?:string){
+        this.token = token
+  }
+    protected headers() {
+        const headers: Record<string, string> = {}
 
-  }
-  protected headers() {
-    return this.token? { Authorization: this.token }: undefined
-  }
+        if (this.token) {
+            headers['Authorization'] = this.token
+        }
+
+        return headers
+        }
 
     async get(url: string) {
         return this.request.get(`${this.baseURL}${url}`, {headers: this.headers()})
