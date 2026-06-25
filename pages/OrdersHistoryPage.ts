@@ -1,22 +1,35 @@
+import { expect } from "@playwright/test";
 import { BasePage } from "./BasePage";
 
 
 class OrdersHistoryPage extends BasePage{
 
-    displayedOrders:any    
+    lastOrderDisplayed:any    
     backToShopBtn:any
+    ordersList:any
 
     constructor(page:any){
         super(page)
-        this.displayedOrders = page.locator("tbody")
-        this.backToShopBtn = page.getByRole('button', {name: 'Go Back to Shop'})
-//getByRole('rowheader', { name: '6a3d3c8c378febeacdcdbbad' })
+                this.backToShopBtn = page.getByRole('button', {name: 'Go Back to Shop'})
+                this.ordersList = page.locator("tbody th")
+
 
     }
 
-    async getLastOrderHistoryText(item:string){
-        const text = await this.displayedOrders.allTextContents()
-        return (text.toString()).split(item)[0]
+    async lastOrder(orderNum:string){
+        this.lastOrderDisplayed = this.page.getByRole('rowheader', { name: orderNum })
+        await this.lastOrderDisplayed.waitFor('visible')
+
+        return this.lastOrderDisplayed
+    }
+
+    // async getLastOrderHistoryText(item:string){
+    //     const text = await this.displayedOrders.allTextContents()
+    //     return (text.toString()).split(item)[0]
+    // }
+
+    async getOrdersList(){
+         return await this.ordersList.allTextContents()
     }
 }
 

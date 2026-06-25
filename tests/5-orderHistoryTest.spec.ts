@@ -45,8 +45,6 @@ test.describe("Testing dashboard", async()=>{
         apiToken = loginResponse.token
         userId = loginResponse.userId
 
-        console.log("USERID:", userId)
-        console.log("RESPONSE:",loginResponse)
 
         await loginObj.goToUrl("https://rahulshettyacademy.com/client/")
         await loginObj.setCredentials(email,pass)
@@ -62,10 +60,10 @@ test.describe("Testing dashboard", async()=>{
         await dashObj.clickProductDetails("ADIDAS ORIGINAL")    
         await expect (prodObj.productDetails).toBeVisible() //espero que se carguen los datos del producto
         await prodObj.clickAddToCartButton()
-        expect (await cartApi.getCartCount(userId)).toBeGreaterThan(0) //chequear api de cart, a ver cuantos prod tiene
-        console.log(await cartApi.getCartCount(userId))
+        await expect.poll(async () => {return await cartApi.getCartCount(userId)}).toBeGreaterThan(0)
+        //expect (await cartApi.getCartCount(userId)).toBeGreaterThan(0) //chequear api de cart, a ver cuantos prod tiene
         await dashObj.clickCartLink()
-        await expect(cartObj.buyNowBtn).toBeVisible()
+        await expect(cartObj.checkoutBtn).toBeVisible()
         await cartObj.clickCheckoutButton()
 
         await checkoutObj.setCardNumber("0303456")
@@ -85,13 +83,10 @@ test.describe("Testing dashboard", async()=>{
         console.log("Your order number is: " +orderNum)
 
 
-        await dashObj.clickOrdersLink()
+        await dashObj.clickOrdersLink()        
 
-        await expect(ordersHistoryObj.backToShopBtn).toBeVisible()
-
-        expect(await ordersHistoryObj.getLastOrderHistoryText("ADIDAS ORIGINAL")).toContain(orderNum)
-
-        await page.pause()
+        expect(await ordersHistoryObj.lastOrder(orderNum)).toBeVisible()
+        
 
       
     })

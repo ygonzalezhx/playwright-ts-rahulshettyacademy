@@ -31,8 +31,6 @@ test.describe("Testing dashboard", async()=>{
         apiToken = loginResponse.token
         userId = loginResponse.userId
 
-        console.log("USERID:", userId)
-        console.log("RESPONSE:",loginResponse)
 
         await loginObj.goToUrl("https://rahulshettyacademy.com/client/")
         await loginObj.setCredentials(email,pass)
@@ -58,9 +56,10 @@ test.describe("Testing dashboard", async()=>{
         await prodObj.clickAddToCartButton()
 
         await expect(prodObj.validationText).toBeVisible()
-        expect (await cartApi.getCartCount(userId)).toBeGreaterThan(0)
+        await expect.poll(async () => {return await cartApi.getCartCount(userId)}).toBeGreaterThan(0)
+        //expect (await cartApi.getCartCount(userId)).toBeGreaterThan(0)
 
-        //await page.pause()
+        
     })
 
     test("Add product to cart and continue shopping",async({request})=>{
@@ -70,7 +69,9 @@ test.describe("Testing dashboard", async()=>{
         await prodObj.clickAddToCartButton()
 
         await expect(prodObj.validationText).toBeVisible()
-        expect (await cartApi.getCartCount(userId)).toBeGreaterThan(0)
+
+        await expect.poll(async () => {return await cartApi.getCartCount(userId)}).toBeGreaterThan(0)
+       // expect (await cartApi.getCartCount(userId)).toBeGreaterThan(0)
 
         await prodObj.clickContinueShoppingButton()
         await expect(page).toHaveURL("https://rahulshettyacademy.com/client/#/dashboard/dash")
