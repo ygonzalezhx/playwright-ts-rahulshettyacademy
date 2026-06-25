@@ -4,7 +4,7 @@ import { DashboardPage } from '../pages/DashboardPage';
 
 
 
-test.describe("Testing login", async()=>{
+test.describe("Testing login feature", async()=>{
 
     let loginObj:any
     let dashObj:any
