@@ -5,7 +5,7 @@ import { ProductPage } from '../pages/ProductPage';
 import { CartPage } from '../pages/CartPage';
 import { CheckoutPage } from '../pages/CheckoutPage';
 import { OrderPlacedPage } from '../pages/OrderPlacedPage';
-import { CartApi } from '../api/cartApi';
+import { CartApi } from '../api/CartApi';
 import { AuthApi } from '../api/AuthApi';
 import { OrdersHistoryPage } from '../pages/OrdersHistoryPage';
 

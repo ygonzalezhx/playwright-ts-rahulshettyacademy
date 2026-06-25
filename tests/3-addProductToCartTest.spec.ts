@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import {LoginPage} from '../pages/LoginPage'
 import { DashboardPage } from '../pages/DashboardPage';
 import { ProductPage } from '../pages/ProductPage';
-import { CartApi } from '../api/cartApi';
+import { CartApi } from '../api/CartApi';
 import { AuthApi } from '../api/AuthApi';
 import { ProductApi } from '../api/ProductApi';
 
