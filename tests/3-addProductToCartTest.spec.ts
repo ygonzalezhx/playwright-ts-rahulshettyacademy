@@ -18,6 +18,7 @@ test.describe("Testing dashboard", async()=>{
     let authAPI:any 
     let apiToken:any
     let baseUrl="https://rahulshettyacademy.com"
+    let userId:any
 
     test.beforeEach("Launch browser and login",async({browser, request})=>{
         const context= await browser.newContext()
@@ -26,7 +27,8 @@ test.describe("Testing dashboard", async()=>{
         dashObj = new DashboardPage(page)
         prodObj = new ProductPage(page)
         authAPI = new AuthApi(request)
-        apiToken = await authAPI.login(email,pass)
+        apiToken = (await authAPI.login(email,pass)).token
+        userId = (await authAPI.login(email,pass)).userId
 
         await loginObj.goToUrl("https://rahulshettyacademy.com/client/")
         await loginObj.setCredentials(email,pass)
@@ -52,7 +54,7 @@ test.describe("Testing dashboard", async()=>{
         await prodObj.clickAddToCartButton()
 
         await expect(prodObj.validationText).toBeVisible()
-        expect (await cartApi.getCartCount()).toBeGreaterThan(0)
+        expect (await cartApi.getCartCount(userId)).toBeGreaterThan(0)
 
         //await page.pause()
     })
@@ -64,7 +66,7 @@ test.describe("Testing dashboard", async()=>{
         await prodObj.clickAddToCartButton()
 
         await expect(prodObj.validationText).toBeVisible()
-        expect (await cartApi.getCartCount()).toBeGreaterThan(0)
+        expect (await cartApi.getCartCount(userId)).toBeGreaterThan(0)
 
         await prodObj.clickContinueShoppingButton()
         await expect(page).toHaveURL("https://rahulshettyacademy.com/client/#/dashboard/dash")

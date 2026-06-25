@@ -2,8 +2,8 @@ import { BaseApiClient } from "./BaseApiClient"
 
 class CartApi extends BaseApiClient {
 
-async getCartCount() {
-    const res = await this.request.get(`${this.baseURL}/api/ecom/user/get-cart-count/6972ddd1c941646b7ab101f6`,
+async getCartCount(userId:string) {
+    const res = await this.request.get(`${this.baseURL}/api/ecom/user/get-cart-count/${userId}`,
       {
         headers: this.headers()
       }
@@ -14,8 +14,8 @@ async getCartCount() {
     return (resJson.count)
   }
 
-async getCartMessage() {
-    const res = await this.request.get(`${this.baseURL}/api/ecom/user/get-cart-count/6972ddd1c941646b7ab101f6`,
+async getCartMessage(userId:string) {
+    const res = await this.request.get(`${this.baseURL}/api/ecom/user/get-cart-count/${userId}`,
       {
         headers: this.headers()
       }

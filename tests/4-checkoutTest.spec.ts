@@ -25,6 +25,7 @@ test.describe("Testing dashboard", async()=>{
     let authAPI:any 
     let apiToken:any
     let baseUrl="https://rahulshettyacademy.com"
+    let userId:any
     
 
     test.beforeEach("Launch browser and login",async({browser, request})=>{
@@ -37,7 +38,8 @@ test.describe("Testing dashboard", async()=>{
         checkoutObj = new CheckoutPage(page)
         orderPlacedObj = new OrderPlacedPage(page)
         authAPI = new AuthApi(request)
-        apiToken = await authAPI.login(email,pass)
+        apiToken = (await authAPI.login(email,pass)).token
+        userId = (await authAPI.login(email,pass)).userId
 
         await loginObj.goToUrl("https://rahulshettyacademy.com/client/")
         await loginObj.setCredentials(email,pass)
@@ -55,7 +57,7 @@ test.describe("Testing dashboard", async()=>{
         await expect (prodObj.productDetails).toBeVisible() //espero que se carguen los datos del producto
         
         await prodObj.clickAddToCartButton()
-        expect (await cartApi.getCartCount()).toBeGreaterThan(0) //chequear api de cart, a ver cuantos prod tiene
+        expect (await cartApi.getCartCount(userId)).toBeGreaterThan(0) //chequear api de cart, a ver cuantos prod tiene
        
         await dashObj.clickCartLink()
         await expect(cartObj.buyNowBtn).toBeVisible()
@@ -83,8 +85,8 @@ test.describe("Testing dashboard", async()=>{
         await dashObj.clickProductDetails("ADIDAS ORIGINAL")    
         await expect (prodObj.productDetails).toBeVisible() //espero que se carguen los datos del producto
         await prodObj.clickAddToCartButton()
-        expect (await cartApi.getCartCount()).toBeGreaterThan(0) //chequear api de cart, a ver cuantos prod tiene
-        console.log(await cartApi.getCartCount())
+        expect (await cartApi.getCartCount(userId)).toBeGreaterThan(0) //chequear api de cart, a ver cuantos prod tiene
+        console.log(await cartApi.getCartCount(userId))
         await dashObj.clickCartLink()
         await expect(cartObj.buyNowBtn).toBeVisible()
         await cartObj.clickCheckoutButton()
@@ -100,7 +102,7 @@ test.describe("Testing dashboard", async()=>{
 
         
         await expect(orderPlacedObj.successText).toBeVisible()
-        expect(await cartApi.getCartMessage()).toBe("No Product in Cart")
+        expect(await cartApi.getCartMessage(userId)).toBe("No Product in Cart")
 
       
     })

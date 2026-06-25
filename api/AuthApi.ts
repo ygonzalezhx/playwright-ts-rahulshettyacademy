@@ -15,7 +15,8 @@ class AuthApi {
     )
 
     const body = await res.json()
-    return body.token
+    //return body.token
+    return body
   }
 }
 
