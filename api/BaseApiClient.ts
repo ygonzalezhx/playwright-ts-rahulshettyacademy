@@ -10,8 +10,7 @@ class BaseApiClient {
   }
 
     async get(url: string) {
-        return this.request.get(`${this.baseURL}${url}`, {headers: this.headers()
-        })
+        return this.request.get(`${this.baseURL}${url}`, {headers: this.headers()})
     }
 
     async post(url: string, data?: any) {

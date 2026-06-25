@@ -26,7 +26,7 @@ class OrderPlacedPage extends BasePage{
     async getOrderNumber(){
         const message = await this.header.textContent()
         const numberOrder = message.split('|')[1]
-        return numberOrder
+        return (numberOrder.trim())
     }
 }
 
