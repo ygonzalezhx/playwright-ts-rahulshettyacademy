@@ -72,7 +72,7 @@ test.describe("Testing dashboard", async()=>{
         await expect(orderPlacedObj.headerMessage).toBeVisible()
 
         
-        await expect(orderPlacedObj.successText).toContainText("Order Placed Successfully")
+        await expect(orderPlacedObj.successText).toBeVisible()
         expect(await cartApi.getCartMessage()).toBe("No Product in Cart")
 
         const orderNum = await orderPlacedObj.getOrderNumber()
@@ -85,7 +85,7 @@ test.describe("Testing dashboard", async()=>{
 
         expect(await ordersHistoryObj.getLastOrderHistoryText("ADIDAS ORIGINAL")).toContain(orderNum)
 
-        //console.log (await ordersHistoryObj.getOrdersHistoryText())
+        await page.pause()
 
       
     })

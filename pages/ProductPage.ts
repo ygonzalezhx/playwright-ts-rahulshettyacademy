@@ -16,7 +16,8 @@ class ProductPage extends BasePage{
         this.continueShoppingBtn = page.getByRole('link', { name: 'Continue Shopping' })
         this.productDetails = page.getByText('Apple phone')
         this.addToCart = page.getByRole('button', { name: 'Add To Cart' })
-        this.validationText = page.locator(".toast-success")
+        this.validationText = page.locator(".toast-success").filter({ hasText: 'Product Added To Cart'
+})
 
     }
     async clickAddToCartButton(){

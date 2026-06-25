@@ -20,16 +20,17 @@ test.describe("Testing login feature", async()=>{
 
     })
 
-    test.skip("Login succesfully",async()=>{
+    test("Login succesfully",async()=>{
 
         await loginObj.setCredentials("mehadimanzoor5@gmail.com","Mehek@123")
         await loginObj.clickLoginButton()
 
         await expect(page).toHaveURL("https://rahulshettyacademy.com/client/#/dashboard/dash")
+        await expect(loginObj.successfulLoginText).toBeVisible()
        
     })
 
-    test.skip("Logout successfully",async()=>{
+    test("Logout successfully",async()=>{
         await loginObj.setCredentials("mehadimanzoor5@gmail.com","Mehek@123")
         await loginObj.clickLoginButton()
 
@@ -42,7 +43,7 @@ test.describe("Testing login feature", async()=>{
     })
 
 
-    test.skip("Login with empty credentials",async()=>{
+    test("Login with empty credentials",async()=>{
         await loginObj.setCredentials("","")
         await loginObj.clickLoginButton()
 
@@ -52,12 +53,12 @@ test.describe("Testing login feature", async()=>{
         expect(messages).toContain("*Password is required")
     })
 
-        test("Login with invalid credentials",async()=>{
+    test("Login with invalid credentials",async()=>{
         await loginObj.setCredentials("mehadimanzoor5@gmail.com","asda")
         await loginObj.clickLoginButton()
 
        
-        expect(await loginObj.getValidationText()).toContain("Incorrect email or password.")
+        await expect(loginObj.invalidCredentialsText).toBeVisible()
     })
 
 })

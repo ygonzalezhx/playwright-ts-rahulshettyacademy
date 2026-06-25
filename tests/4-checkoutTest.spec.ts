@@ -48,7 +48,7 @@ test.describe("Testing dashboard", async()=>{
 
     })
 
-       test.skip("Add product to cart and checkout ",async({request})=>{
+       test("Add product to cart and checkout ",async({request})=>{
         const cartApi = new CartApi(request,baseUrl,apiToken)
         
         await dashObj.clickProductDetails("ADIDAS ORIGINAL")    
@@ -73,7 +73,7 @@ test.describe("Testing dashboard", async()=>{
 
         console.log(await orderPlacedObj.getOrderNumber())
 
-        await expect(orderPlacedObj.successText).toContainText("Order Placed Successfully")
+        await expect(orderPlacedObj.successText).toBeVisible()
 
     })
 
@@ -99,7 +99,7 @@ test.describe("Testing dashboard", async()=>{
         await expect(orderPlacedObj.headerMessage).toBeVisible()
 
         
-        await expect(orderPlacedObj.successText).toContainText("Order Placed Successfully")
+        await expect(orderPlacedObj.successText).toBeVisible()
         expect(await cartApi.getCartMessage()).toBe("No Product in Cart")
 
       

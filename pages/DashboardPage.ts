@@ -22,7 +22,7 @@ class DashboardPage extends BasePage{
         this.ordersLink = page.getByRole('button', { name: 'ORDERS' })
         this.homeLink = page.getByRole('button', { name: 'HOME' })
         this.sidebar = page.locator("#sidebar")
-        this.validationText = page.locator(".toast-success")
+        this.validationText = page.locator(".toast-success").filter({ hasText: 'Product Added To Cart' })
     }
 
     async clickLogoutButton(){

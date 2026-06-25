@@ -14,7 +14,7 @@ class OrderPlacedPage extends BasePage{
         this.headerMessage = page.getByRole('heading', { name: 'Thankyou for the order.' })
         this.header = page.getByRole('cell', { name: 'Thankyou for the order. You' }).nth(1)
         this.downloadOrderDetails = page.getByRole('button', { name: 'Click To Download Order' })
-        this.successText = page.locator(".toast-success")
+        this.successText = page.locator(".toast-success").filter({hasText: 'Order Placed Successfully'})
 
 
     }

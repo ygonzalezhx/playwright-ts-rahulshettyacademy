@@ -24,7 +24,7 @@ test.describe("Testing dashboard", async()=>{
 
     })
 
-    test.skip("Dashboard correctly displayed", async()=>{
+    test("Dashboard correctly displayed", async()=>{
 
         await expect(dashObj.sidebar).toBeVisible()
     })
@@ -34,11 +34,7 @@ test.describe("Testing dashboard", async()=>{
 
        
         await dashObj.clickAddToCartButton("iphone 13 pro")
-
         await expect(dashObj.validationText).toBeVisible()
-
-        await expect(dashObj.validationText).toContainText("Product Added To Cart")
-
         await page.pause()
     })
 

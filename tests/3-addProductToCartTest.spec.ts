@@ -52,7 +52,6 @@ test.describe("Testing dashboard", async()=>{
         await prodObj.clickAddToCartButton()
 
         await expect(prodObj.validationText).toBeVisible()
-        await expect(prodObj.validationText).toContainText("Product Added To Cart")
         expect (await cartApi.getCartCount()).toBeGreaterThan(0)
 
         //await page.pause()
@@ -65,7 +64,6 @@ test.describe("Testing dashboard", async()=>{
         await prodObj.clickAddToCartButton()
 
         await expect(prodObj.validationText).toBeVisible()
-        await expect(prodObj.validationText).toContainText("Product Added To Cart")
         expect (await cartApi.getCartCount()).toBeGreaterThan(0)
 
         await prodObj.clickContinueShoppingButton()

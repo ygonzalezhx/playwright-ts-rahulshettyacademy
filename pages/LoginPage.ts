@@ -8,7 +8,8 @@ class LoginPage extends BasePage{
     password: any
     loginButton:any
     validationMessages:any
-    validationText:Locator
+    successfulLoginText:any
+    invalidCredentialsText:any
 
     constructor(page:any){
         super(page)
@@ -16,7 +17,8 @@ class LoginPage extends BasePage{
         this.password = page.locator("#userPassword")
         this.loginButton = page.getByRole('button', { name: 'Login' })
         this.validationMessages = page.locator(".invalid-feedback")
-        this.validationText = page.locator(".toast-error")
+        this.successfulLoginText = page.locator('.toast-success').filter({ hasText: 'Login Successfully' })
+        this.invalidCredentialsText = page.locator(".toast-error").filter({hasText: 'Incorrect email or password.'})
     }
 
     async setCredentials(inputEmail:string, inputPassword:string){
@@ -28,11 +30,6 @@ class LoginPage extends BasePage{
         await this.loginButton.click()
     }
 
-    async getValidationText(){
-
-        return await this.validationText.textContent()
-
-    }
 
     async getValidationMessages(){
         const message = await this.validationMessages.allTextContents()
