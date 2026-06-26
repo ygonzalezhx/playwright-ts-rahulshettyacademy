@@ -38,4 +38,15 @@ test.describe("Testing dashboard", async()=>{
         await page.pause()
     })
 
+
+    test("Apply filters and check results",async()=>{
+
+        await dashObj.selectSubCategory("t-shirts")
+
+        await expect(dashObj.noProdFoundText).toBeVisible()
+
+
+
+    })
+
 })
