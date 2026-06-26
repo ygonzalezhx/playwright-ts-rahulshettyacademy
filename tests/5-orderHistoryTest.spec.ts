@@ -85,7 +85,7 @@ test.describe("Testing dashboard", async()=>{
 
         await dashObj.clickOrdersLink()        
 
-        expect(await ordersHistoryObj.lastOrder(orderNum)).toBeVisible()
+        await expect(ordersHistoryObj.lastOrder(orderNum)).toBeVisible()
         
 
       

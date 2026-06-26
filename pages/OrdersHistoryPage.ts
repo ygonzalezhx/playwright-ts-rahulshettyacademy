@@ -16,10 +16,8 @@ class OrdersHistoryPage extends BasePage{
 
     }
 
-    async lastOrder(orderNum:string){
+    lastOrder(orderNum:string){
         this.lastOrderDisplayed = this.page.getByRole('rowheader', { name: orderNum })
-        await this.lastOrderDisplayed.waitFor('visible')
-
         return this.lastOrderDisplayed
     }
 
