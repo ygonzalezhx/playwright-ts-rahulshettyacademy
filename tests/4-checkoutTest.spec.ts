@@ -107,7 +107,7 @@ test.describe("Testing dashboard", async()=>{
 
         
         await expect(orderPlacedObj.successText).toBeVisible()
-        expect(await cartApi.getCartMessage(userId)).toBe("No Product in Cart")
+        await expect.poll(async () => {return await cartApi.getCartMessage(userId)}).toBe("No Product in Cart")
 
       
     })
