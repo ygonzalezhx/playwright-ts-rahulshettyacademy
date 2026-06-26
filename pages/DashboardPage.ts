@@ -11,6 +11,8 @@ class DashboardPage extends BasePage{
     homeLink:any
     sidebar:any 
     validationText:any
+    subCategories:any
+    noProdFoundText:any
 
 
     constructor(page:any){
@@ -23,6 +25,8 @@ class DashboardPage extends BasePage{
         this.homeLink = page.getByRole('button', { name: 'HOME' })
         this.sidebar = page.locator("#sidebar")
         this.validationText = page.locator(".toast-success").filter({ hasText: 'Product Added To Cart' })
+        this.noProdFoundText = page.locator(".toast-error").filter({ hasText: 'No Products Found' })
+        
     }
 
     async clickLogoutButton(){
@@ -68,6 +72,22 @@ class DashboardPage extends BasePage{
     async clickHomeLink(){
 
         await this.homeLink.click()
+    }
+
+    async selectSubCategory(category:string){
+        if(category == "t-shirts"){
+            this.subCategories = this.page.getByRole('checkbox').nth(3)}
+            this.subCategories.click()
+
+        if(category == "shirts"){
+            this.subCategories = this.page.getByRole('checkbox').nth(4).click()}
+        if(category == "shoes"){
+            this.subCategories = this.page.getByRole('checkbox').nth(5).click()}
+        if(category == "mobiles"){
+            this.subCategories = this.page.getByRole('checkbox').nth(6).click()}
+        if(category == "laptops"){
+            this.subCategories = this.page.getByRole('checkbox').nth(7).click()}
+
     }
 
 

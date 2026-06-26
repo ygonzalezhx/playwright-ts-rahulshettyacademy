@@ -105,7 +105,6 @@ test.describe("Testing dashboard", async()=>{
         await checkoutObj.clickPlaceOrderButton()
         await expect(orderPlacedObj.headerMessage).toBeVisible()
 
-        
         await expect(orderPlacedObj.successText).toBeVisible()
         await expect.poll(async () => {return await cartApi.getCartMessage(userId)}).toBe("No Product in Cart")
 
