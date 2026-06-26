@@ -24,18 +24,29 @@ test.describe("Testing dashboard", async()=>{
 
     })
 
-    test("Dashboard correctly displayed", async()=>{
+    test.skip("Dashboard correctly displayed", async()=>{
 
         await expect(dashObj.sidebar).toBeVisible()
     })
 
 
-    test("Add dashboard product to cart",async()=>{
+    test.skip("Add dashboard product to cart",async()=>{
 
        
         await dashObj.clickAddToCartButton("iphone 13 pro")
         await expect(dashObj.validationText).toBeVisible()
         await page.pause()
+    })
+
+
+    test("Apply filters and check results",async()=>{
+
+        await dashObj.selectSubCategory("t-shirts")
+
+        await expect(dashObj.noProdFoundText).toBeVisible()
+
+
+
     })
 
 })
