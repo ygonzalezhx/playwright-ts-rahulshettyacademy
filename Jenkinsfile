@@ -1,29 +1,38 @@
 pipeline {
-  agent any
-  options { timeout(60); timestamps() }
 
-  stages {
-    stage('Checkout')         { steps { checkout scm } }
-    stage('Install deps')     { steps { sh 'npm ci' } }
-    stage('Install browsers') { steps { sh 'npx playwright install' } }
-    stage('Run tests')        { steps { sh 'npx playwright test --reporter=html,line,junit' } }
-  }
+    agent any
 
-  post {
-    always {
-      archiveArtifacts artifacts: 'playwright-report/**', fingerprint: true
+    stages {
 
-      publishHTML(target: [
-        reportDir            : 'playwright-report',
-        reportFiles          : 'index.html',
-        reportName           : 'Playwright Report',
-        keepAll              : true,
-        allowMissing         : false,
-        alwaysLinkToLastBuild: true
-      ])
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/ygonzalezhx/playwright-ts-rahulshettyacademy'
+            }
+        }
 
-      junit allowEmptyResults: true,
-            testResults      : 'test-results/*.xml'
+        stage('Install dependencies') {
+            steps {
+                bat 'npm ci'
+            }
+        }
+
+        stage('Install Playwright browsers') {
+            steps {
+                bat 'npx playwright install'
+            }
+        }
+
+        stage('Run tests') {
+            steps {
+                bat 'npx playwright test'
+            }
+        }
+
+        stage('Clean') {
+            steps {
+                deleteDir()
+            }
+        }
     }
-  }
 }
