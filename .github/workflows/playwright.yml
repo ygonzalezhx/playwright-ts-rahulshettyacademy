@@ -18,6 +18,10 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+    - name: Print BASE_URL
+      run: |
+       echo "BASE_URL=$BASE_URL"
+       printenv | grep BASE_URL
     - name: Run Playwright tests
       run: npx playwright test
     - uses: actions/upload-artifact@v4
