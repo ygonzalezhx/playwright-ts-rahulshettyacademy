@@ -4,7 +4,7 @@ import { DashboardPage } from '../pages/DashboardPage';
 
 
 
-test.describe("Testing login feature", async()=>{
+test.describe.serial("Testing login feature", async()=>{
 
     let loginObj:any
     let dashObj:any
@@ -16,7 +16,7 @@ test.describe("Testing login feature", async()=>{
         loginObj = new LoginPage(page)
         dashObj = new DashboardPage(page)
 
-        await loginObj.goToUrl("https://rahulshettyacademy.com/client/")
+        await loginObj.goToUrl("/client")
 
     })
 
