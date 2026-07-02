@@ -25,7 +25,7 @@ test.describe.serial("Testing login feature", async()=>{
         await loginObj.setCredentials("mehadimanzoor5@gmail.com","Mehek@123")
         await loginObj.clickLoginButton()
 
-        await expect(page).toHaveURL("https://rahulshettyacademy.com/client/#/dashboard/dash")
+        await expect(page).toHaveURL("/client/#/dashboard/dash")
         await expect(loginObj.successfulLoginText).toBeVisible()
        
     })
@@ -34,10 +34,10 @@ test.describe.serial("Testing login feature", async()=>{
         await loginObj.setCredentials("mehadimanzoor5@gmail.com","Mehek@123")
         await loginObj.clickLoginButton()
 
-        await expect(page).toHaveURL("https://rahulshettyacademy.com/client/#/dashboard/dash")
+        await expect(page).toHaveURL("/client/#/dashboard/dash")
 
         await dashObj.clickLogoutButton()
-        await expect(page).toHaveURL("https://rahulshettyacademy.com/client/#/auth/login")
+        await expect(page).toHaveURL("/client/#/auth/login")
 
         
     })

@@ -26,7 +26,7 @@ test.describe("Testing dashboard", async()=>{
     let pass="Mehek@123"
     let authAPI:any 
     let apiToken:any
-    let baseUrl="https://rahulshettyacademy.com"
+    let baseUrl=process.env.BASE_URL!
     let userId:any
     
 
@@ -46,10 +46,10 @@ test.describe("Testing dashboard", async()=>{
         userId = loginResponse.userId
 
 
-        await loginObj.goToUrl("https://rahulshettyacademy.com/client/")
+        await loginObj.goToUrl("/client/")
         await loginObj.setCredentials(email,pass)
         await loginObj.clickLoginButton()
-        await expect(page).toHaveURL("https://rahulshettyacademy.com/client/#/dashboard/dash")
+        await expect(page).toHaveURL("/client/#/dashboard/dash")
 
         
 
