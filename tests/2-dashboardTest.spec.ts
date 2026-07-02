@@ -16,11 +16,11 @@ test.describe("Testing dashboard", async()=>{
         loginObj = new LoginPage(page)
         dashObj = new DashboardPage(page)
 
-        await loginObj.goToUrl("https://rahulshettyacademy.com/client/")
+        await loginObj.goToUrl("/client/")
         await loginObj.setCredentials("mehadimanzoor5@gmail.com","Mehek@123")
         await loginObj.clickLoginButton()
 
-        await expect(page).toHaveURL("https://rahulshettyacademy.com/client/#/dashboard/dash")
+        await expect(page).toHaveURL("/client/#/dashboard/dash")
 
     })
 
